@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { GridModule } from '@progress/kendo-angular-grid';
 
+import { PersonService } from './services/person.service';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -12,7 +13,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     GridModule
   ],
-  providers: [],
+  providers: [PersonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

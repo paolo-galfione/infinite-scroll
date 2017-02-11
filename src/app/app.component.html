@@ -1,3 +1,22 @@
-<h1>
-  {{title}}
-</h1>
+<kendo-grid
+    [data]="gridView"
+    [skip]="paging.skip"
+    [pageSize]="paging.take"
+    [scrollable]="'virtual'"
+    [rowHeight]="36"
+    [height]="300"
+    (pageChange)="pageChange($event)"
+  >
+  <kendo-grid-column field="id" [width]="80" title="ID"></kendo-grid-column>
+  <kendo-grid-column field="firstName" title="First Name" [width]="130"></kendo-grid-column>
+  <kendo-grid-column field="lastName" title="Last Name" [width]="130"></kendo-grid-column>
+  <kendo-grid-column field="city" title="City" [width]="130"></kendo-grid-column>
+  <kendo-grid-column field="title" title="Title"></kendo-grid-column>
+</kendo-grid>
+
+<ul>  
+  <li>skip: <strong>{{paging.skip}}</strong></li>
+  <li>take: <strong>{{paging.take}}</strong></li>
+  <li>returned: <strong>{{paging.returned}}</strong></li>
+  <li>total: <strong>{{paging.total}}</strong></li>
+</ul>
