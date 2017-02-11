@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { PersonService } from './services/person.service';
 import { Paging } from './services/paging';
+import { Person } from './services/person';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,15 @@ export class AppComponent {
         this.loadPersons();
     }
 
-    private loadPersons(): void {
-        this.gridView = {
-            data: this.personService.getPeople(this.paging),
-            total: this.paging.total
-        };
+    private loadPersons(): void { 
+        this.personService.getHttpPeopleFake(this.paging).subscribe(
+            (persons: Person[]) => {
+                this.gridView = {
+                    data: persons,
+                    total: this.paging.total
+                }
+            }
+        );
     }
+
 }

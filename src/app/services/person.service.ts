@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import "rxjs/add/observable/of";
+
 import { Paging } from './paging';
 import { Person } from './person';
+
 
 @Injectable()
 export class PersonService {
 
-    getPeople(paging: Paging): Person[] {
+    getHttpPeopleFake(paging: Paging): Observable<Person[]> {
         const firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne", "Nige"],
             lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth", "White"],
             cities = ["Seattle", "Tacoma", "Kirkland", "Redmond", "London", "Philadelphia", "New York", "Seattle", "London", "Boston"],
@@ -19,7 +23,7 @@ export class PersonService {
             paging.take;
 
         /* Generating example data */
-        return Array(paging.returned).fill({}).map((_, idx) => ({
+        const result = Array(paging.returned).fill({}).map((_, idx) => ({
             id: paging.skip + idx + 1,
             firstName: firstNames[Math.floor(Math.random() * firstNames.length)],
             lastName: lastNames[Math.floor(Math.random() * lastNames.length)],
@@ -27,6 +31,7 @@ export class PersonService {
             title: titles[Math.floor(Math.random() * titles.length)]
           })
         );
-    }
 
+        return Observable.of(result).delay(200);
+    }
 }
